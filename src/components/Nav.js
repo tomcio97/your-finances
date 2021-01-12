@@ -10,10 +10,10 @@ export const Nav = () => {
   </button>
   <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div className="navbar-nav">
-      <a className="nav-item nav-link active" href="#">Finanse<span class="sr-only">(current)</span></a>
+      <a className="nav-item nav-link active" href="#">Finanse<span className="sr-only">(current)</span></a>
       <a className="nav-item nav-link" href="#">Przychody</a>
       <a className="nav-item nav-link" href="#">Wydatki</a>
-      <a className="nav-item nav-link" onClick={() => auth.signOut()}>Wyloguj</a>
+      <a className="nav-item nav-link" href="" onClick={() => auth.signOut()}>Wyloguj</a>
     </div>
   </div>
 </nav>
