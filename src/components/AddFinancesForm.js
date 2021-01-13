@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useHistory } from "react-router-dom";
 import { FinancesService } from "../service/Finances";
+import  withAuthProtection  from "../hoc/withAuthProtection"
 
 export const AddFinancesForm = () => {
 
@@ -62,3 +63,5 @@ export const AddFinancesForm = () => {
     </>
     )
 }
+
+export const ProtectedAddFinancesForm = withAuthProtection(AddFinancesForm, '/')
