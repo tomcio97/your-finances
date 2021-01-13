@@ -1,23 +1,15 @@
-import { useContext, useEffect } from "react"
-import { UserContext } from "../providers/UserProvider"
-import { Nav } from "./Nav"
+import { useEffect } from "react"
 import  withAuthProtection  from "../hoc/withAuthProtection"
-import { AddFinancesForm } from "./AddFinancesForm"
+import { FinancesList } from "./FinancesList"
+
 
 export const Finances = () => {
 
-    const user = useContext(UserContext);
-
-    useEffect(() => {
-    })
 
     return (
         <>
-        <Nav/>
-            Jesteś zalogowany jako {user?.displayName}
-            <h1>Finanse</h1>
-
-            <AddFinancesForm/>
+            <h1 className="mb-5">Twoje finanse</h1>
+            <FinancesList />
         </>
     )
 }

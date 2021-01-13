@@ -24,7 +24,7 @@ export const SignIn = () => {
     const isInvalid = email === '' || password === '';
 
     const onSubmit = event => {
-        event.preventDefault();
+        event.preventDefault(); 
         Auth.login(email, password)
         .then(() => {history.push('/finanse')})
         .catch((error) => {setError(error)})
@@ -32,9 +32,9 @@ export const SignIn = () => {
 
     return (
     <>
-    <div class="container">
-        <div class="row justify-content-around">
-        <div class="col-4 align-self-center">
+    <div className="container">
+        <div className="row justify-content-around">
+        <div className="col-4 align-self-center">
     <form onSubmit={onSubmit} className="form-group">
        <input className="form-control mt-2" name="email"  type="text" value={email} onChange={onChange} placeholder="Wprowadz email"/>
        <input className="form-control mt-2" type="password"  value={password} onChange={onChange} name="password" placeholder="Wprowadz hasło" />
