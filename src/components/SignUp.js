@@ -1,11 +1,11 @@
 import { useState } from "react"
 import { useHistory } from "react-router-dom";
+import { AlertifyService } from "../service/Alertify";
 import { Auth } from "../service/Auth";
 
 export const SignUp = () => {
 
     const [registerForm, setRegisterForm] = useState({username: '', email: '', password: '', confirmPassword: ''});
-    const [error, setError] = useState(null);
     const history = useHistory();
 
     const {username, email, password, confirmPassword} = registerForm;
@@ -27,18 +27,21 @@ export const SignUp = () => {
         .then((result) => {result.user.updateProfile({
             displayName: username
         });
+        AlertifyService.success('Zostałeś zarejestrowany');
         history.push('/finanse');   
     })
-        .catch(error => setError(error))
+        .catch(error => {
+            AlertifyService.error(error.message);
+        })
     }
     
     return (
         <>
-        <div class="container div-lower">
-        <div class="row justify-content-around">
-        <div class="col-4 align-self-center">
+        <div className="container div-lower">
+        <div className="row justify-content-around">
+        <div className="col-4 align-self-center">
             <form onSubmit={onSubmit}>
-                <div class="form-group">
+                <div className="form-group">
                 <input className="form-control mt-2" name="username" value={username} onChange={onChange} type="text" placeholder="Wprowadz nazwę użytkownika" />
                 <input className="form-control mt-2" name="email" type="text" value={email} onChange={onChange} placeholder="Wprowadz email"/>
                 <input className="form-control mt-2" type="password"  value={password} onChange={onChange} name="password" placeholder="Wprowadz hasło" />
@@ -47,7 +50,6 @@ export const SignUp = () => {
                 <button type="submit" disabled={isInvalid} className="btn btn-primary ml-1">Zarejestruj się</button>
             </form>
 
-            {error && <p>{error.message}</p>}
             </div>
             </div>
             </div>

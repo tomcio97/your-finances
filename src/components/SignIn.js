@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../providers/UserProvider";
+import { AlertifyService } from "../service/Alertify";
 import { Auth } from "../service/Auth";
 
 export const SignIn = () => {
     
     const [loginForm, setLoginForm] = useState({email: '', password: ''});
-    const [error, setError] = useState(null);
     const history = useHistory();
     const user = useContext(UserContext);
 
@@ -26,8 +26,13 @@ export const SignIn = () => {
     const onSubmit = event => {
         event.preventDefault(); 
         Auth.login(email, password)
-        .then(() => {history.push('/finanse')})
-        .catch((error) => {setError(error)})
+        .then(() => {
+        AlertifyService.success('Zostałeś zalogowany');
+        history.push('/finanse');
+    })
+        .catch((error) => {
+            AlertifyService.error(error.message);
+        })
     }
 
     return (
@@ -41,8 +46,7 @@ export const SignIn = () => {
 
     
     </div>
-    <p>Nie posiadasz jeszcze konta? <span class="text-info"><Link to="/register">Zarejestruj się</Link>.</span></p>    
-    {error && <p>{error.message}</p>}
+    <p>Nie posiadasz jeszcze konta? <span className="text-info"><Link to="/register">Zarejestruj się</Link>.</span></p>    
 
 
    

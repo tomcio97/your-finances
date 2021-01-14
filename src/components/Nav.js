@@ -1,12 +1,17 @@
 import { useContext } from "react"
 import { Link } from "react-router-dom";
 import { UserContext } from "../providers/UserProvider"
+import { AlertifyService } from "../service/Alertify";
 import { auth } from "../service/firebase"
 
 export const Nav = () => {
 
   const user = useContext(UserContext);
 
+  const signOut = () => {
+      auth.signOut();
+      AlertifyService.message('Zostałeś wylogowany');
+  }
 
   return (
     <>
@@ -33,7 +38,7 @@ export const Nav = () => {
             </ul>
             <div className="my-2 my-lg-0">
               <span className="text-muted mr-3">Witaj {user.displayName.charAt(0).toUpperCase() + user.displayName.slice(1)}</span>
-              <button className="btn btn-outline-secondary my-2 my-sm-0" type="submit" onClick={() => auth.signOut()} >Wyloguj</button>
+              <button className="btn btn-outline-secondary my-2 my-sm-0" type="submit" onClick={signOut} >Wyloguj</button>
             </div>
           </div>
         </nav>

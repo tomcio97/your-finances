@@ -2,11 +2,11 @@ import { useState } from "react"
 import { useHistory } from "react-router-dom";
 import { FinancesService } from "../service/Finances";
 import  withAuthProtection  from "../hoc/withAuthProtection"
+import { AlertifyService } from "../service/Alertify";
 
 export const AddFinancesForm = () => {
 
     const [financesForm, setFinancesForm] = useState({ amount: '', date: Date.now(), type: '' , description: ''});
-    const [error, setError] = useState(null);
     const history = useHistory();
 
     const { amount, description, type } = financesForm;
@@ -26,11 +26,11 @@ export const AddFinancesForm = () => {
         financesForm.amount = financesForm.amount.replace(',','.');
         FinancesService.addItem({ ...financesForm })
             .then(() => {
-                setError(null);
+                AlertifyService.success('Pomyślnie zapisano');
                 history.push('/finanse');
             })
             .catch(error => {
-                setError(error);
+                AlertifyService.error(error.message);
             });
     }
 
@@ -68,7 +68,6 @@ export const AddFinancesForm = () => {
                 </div>
             </div>
         </div>
-        {error && <p>{error.message}</p>}
     </>
     )
 }
