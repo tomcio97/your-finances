@@ -34,14 +34,14 @@ export const Finances = () => {
             else outcomes +=parseFloat(value.amount);    
         })
 
-        return (incomes - outcomes);
+        return (incomes - outcomes).toFixed(2);
     }
 
     return (
         <div className="container">
             
             <h1 className="mb-5">Twoje finanse</h1>
-            <h2 className="mb-2">Saldo: {calculateBalance()}</h2> 
+            <h2 className="mb-2">Saldo: {calculateBalance()} PLN</h2> 
             <FinancesList values={values}/>
         </div>
     )

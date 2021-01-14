@@ -34,7 +34,7 @@ export const SignUp = () => {
     
     return (
         <>
-        <div class="container">
+        <div class="container div-lower">
         <div class="row justify-content-around">
         <div class="col-4 align-self-center">
             <form onSubmit={onSubmit}>

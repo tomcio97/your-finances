@@ -5,11 +5,13 @@ import  withAuthProtection  from "../hoc/withAuthProtection"
 
 export const AddFinancesForm = () => {
 
-    const [financesForm, setFinancesForm] = useState({ amount: '', date: Date.now(), type: '' });
+    const [financesForm, setFinancesForm] = useState({ amount: '', date: Date.now(), type: '' , description: ''});
     const [error, setError] = useState(null);
     const history = useHistory();
 
-    const { amount } = financesForm;
+    const { amount, description, type } = financesForm;
+
+    const isInvalid = amount === '' || type === '';
 
     const onChange = event => {
         const val = { [event.target.name]: event.target.value }
@@ -33,7 +35,7 @@ export const AddFinancesForm = () => {
     }
 
     return (<>
-        <div className="container">
+        <div className="container div-lower">
             <div className="row justify-content-around">
                 <div className="col-4 align-self-center">
                     <form onSubmit={onSubmit} className="form-group">
@@ -43,7 +45,14 @@ export const AddFinancesForm = () => {
                             value={amount}
                             onChange={onChange}
                             type="text"
-                            placeholder="Wprowadź kwotę" />
+                            placeholder="Wprowadź kwotę PLN" />
+                        <input
+                            className="form-control mt-2"
+                            name="description"
+                            value={description}
+                            onChange={onChange}
+                            type="text"
+                            placeholder="Opis" />
                         <div className="form-check mt-2">
                             <input className="form-check-input" type="radio" name="type" value="Przychód" onChange={onChange} />
                             <label className="form-check-label">Przychód</label>
@@ -52,7 +61,7 @@ export const AddFinancesForm = () => {
                             <input className="form-check-input" type="radio" name="type" value="Wydatek" onChange={onChange} />
                             <label className="form-check-label">Wydatek</label>
                         </div>
-                        <button className="btn btn-primary mt-1" type="submit">
+                        <button className="btn btn-primary mt-3" disabled={isInvalid} type="submit">
                             Zapisz
                         </button>
                     </form>
