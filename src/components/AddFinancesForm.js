@@ -35,7 +35,8 @@ export const AddFinancesForm = () => {
     }
 
     return (<>
-        <div className="container div-lower">
+        <div className="container">
+        <h1 className="mb-5">Dodaj przychód/wydatek</h1>
             <div className="row justify-content-around">
                 <div className="col-4 align-self-center">
                     <form onSubmit={onSubmit} className="form-group">

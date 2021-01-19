@@ -8,5 +8,6 @@ export const FinancesService = {
     getIncomes: (cb) => collection.where('user_id', '==', auth.currentUser.uid).where('type', '==', 'Przychód').orderBy('date', 'desc').onSnapshot(cb),
     getOutcomes: (cb) => collection.where('user_id', '==', auth.currentUser.uid).where('type', '==', 'Wydatek').orderBy('date', 'desc').onSnapshot(cb),
     addItem: item => collection.add({...item, user_id: auth.currentUser.uid}),
-
+    update: (id, value) => collection.doc(id).update({...value}),
+    delete: (id) => collection.doc(id).delete()
 }
